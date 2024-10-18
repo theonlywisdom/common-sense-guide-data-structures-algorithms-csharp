@@ -2,6 +2,16 @@
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        PrintEvenNumbers(100);
+    }
+
+    public static void PrintEvenNumbers(int max)
+    {
+        int num = 2;
+        while (num <= max)
+        {
+            Console.WriteLine($"{num}");
+            num += 2;
+        }
     }
 }
