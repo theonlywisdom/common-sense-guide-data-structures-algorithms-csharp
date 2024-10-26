@@ -5,10 +5,36 @@ internal partial class Program
 {
     private static void Main(string[] args)
     {
-        int[] intArr = new int[] { 3, 17, 75, 80, 202 };
-        int searchVal = 3;
-        int valIndex = BinarySearch(intArr, searchVal);
-        Console.WriteLine($"{searchVal} is {(valIndex == -1 ? "not found" : $"at index {valIndex}")}");
+        int[] intArr = new int[] { 65, 55, 45, 35, 25, 15, 10 };
+        int[] sortedArray = BubbleSort(intArr);
+
+        foreach (int val in sortedArray)
+        {
+            Console.WriteLine(val);
+        }
+    }
+
+    private static int[] BubbleSort(int[] intArr)
+    {
+        int unsortedUntilIndex = intArr.Length - 1;
+        bool sorted = false;
+
+        while (!sorted)
+        {
+            sorted = true;
+            for (int i = 0; i < unsortedUntilIndex; i++)
+            {
+                if (intArr[i] > intArr[i + 1])
+                {
+                    int tempValAtI = intArr[i];
+                    intArr[i] = intArr[i + 1];
+                    intArr[i + 1] = tempValAtI;
+                    sorted = false;
+                }
+            }
+            unsortedUntilIndex -= 1;
+        }
+        return intArr;
     }
 
     private double MedianOfOrderedArray(int[] valArray)
