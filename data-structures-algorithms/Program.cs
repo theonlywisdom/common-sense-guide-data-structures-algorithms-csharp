@@ -1,13 +1,41 @@
 ﻿
 
+
 internal partial class Program
 {
     private static void Main(string[] args)
     {
-        int[] intArr = new int[] { 17, 3, 75, 202, 80 };
-        int searchVal = 75;
-        int valIndex = LinearSearch(intArr, searchVal);
+        int[] intArr = new int[] { 3, 17, 75, 80, 202 };
+        int searchVal = 3;
+        int valIndex = BinarySearch(intArr, searchVal);
         Console.WriteLine($"{searchVal} is {(valIndex == -1 ? "not found" : $"at index {valIndex}")}");
+    }
+
+    private static int BinarySearch(int[] intArr, int searchVal)
+    {
+        int lowerBound = 0;
+        int upperBound = intArr.Length - 1;
+
+        while (lowerBound < upperBound)
+        {
+            int midPoint = (lowerBound + upperBound) / 2;
+            int valAtMidPoint = intArr[midPoint];
+
+            if (searchVal == valAtMidPoint)
+            {
+                return midPoint;
+            }
+            else if (searchVal < valAtMidPoint)
+            {
+                upperBound = midPoint - 1;
+            }
+            else if (searchVal > valAtMidPoint)
+            {
+                lowerBound = midPoint + 1;
+            }
+        }
+
+        return -1;
     }
 
     private static int LinearSearch(int[] intArr, int searchVal)
