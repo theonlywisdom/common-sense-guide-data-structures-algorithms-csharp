@@ -1,14 +1,39 @@
-﻿
-
-
-internal partial class Program
+﻿internal partial class Program
 {
     private static void Main(string[] args)
     {
-        int[] intArr = new int[] { 1, 5, 3, 9, 1, 4 };
-        int greatestNumber = FindGreatestNumber(intArr);
+        int[] intArr = new int[] { 4, 2, 7, 1, 3 };
+        int[] sortedArray = SelectionSort(intArr);
 
-        Console.WriteLine(greatestNumber);
+        foreach (int val in sortedArray)
+        {
+            Console.WriteLine(val);
+        }
+
+    }
+
+    private static int[] SelectionSort(int[] intArr)
+    {
+        for (int i = 0; i < intArr.Length - 1; i++)
+        {
+            int lowestNumIndex = i;
+            for (int j = i + 1; j < intArr.Length; j++)
+            {
+                if (intArr[j] < intArr[lowestNumIndex])
+                {
+                    lowestNumIndex = j;
+                }
+            }
+
+            if (lowestNumIndex != i)
+            {
+                int tempValAtIndex = intArr[i];
+                intArr[i] = intArr[lowestNumIndex];
+                intArr[lowestNumIndex] = tempValAtIndex;
+            }
+        }
+
+        return intArr;
     }
 
     private static int FindGreatestNumber(int[] intArr)
