@@ -5,13 +5,25 @@ internal partial class Program
 {
     private static void Main(string[] args)
     {
-        int[] intArr = new int[] { 65, 55, 45, 35, 25, 15, 10 };
-        int[] sortedArray = BubbleSort(intArr);
+        int[] intArr = new int[] { 1, 5, 3, 9, 1, 4 };
+        bool hasDuplicate = HasDuplicateValue(intArr);
 
-        foreach (int val in sortedArray)
+        Console.WriteLine(hasDuplicate);
+    }
+
+    private static bool HasDuplicateValue(int[] intArr)
+    {
+        HashSet<int> existingNumbers = new HashSet<int>();
+
+        for (int i = 0; i < intArr.Length; i++)
         {
-            Console.WriteLine(val);
+            if (!existingNumbers.Add(intArr[i]))
+            {
+                return true;
+            }
         }
+
+        return false;
     }
 
     private static int[] BubbleSort(int[] intArr)
