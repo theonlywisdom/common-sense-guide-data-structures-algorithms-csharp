@@ -11,6 +11,11 @@ internal partial class Program
         Console.WriteLine($"{searchVal} is {(valIndex == -1 ? "not found" : $"at index {valIndex}")}");
     }
 
+    private bool IsLeapYear(int year)
+    {
+        return (year % 100 == 0) ? (year % 400 == 0) : (year % 4 == 0);
+    }
+
     private static int BinarySearch(int[] intArr, int searchVal)
     {
         int lowerBound = 0;
