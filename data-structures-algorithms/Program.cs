@@ -6,9 +6,22 @@ internal partial class Program
     private static void Main(string[] args)
     {
         int[] intArr = new int[] { 1, 5, 3, 9, 1, 4 };
-        bool hasDuplicate = HasDuplicateValue(intArr);
+        int greatestNumber = FindGreatestNumber(intArr);
 
-        Console.WriteLine(hasDuplicate);
+        Console.WriteLine(greatestNumber);
+    }
+
+    private static int FindGreatestNumber(int[] intArr)
+    {
+        int greatestNumber = intArr[0];
+        for (int i = 0; i < intArr.Length; i++)
+        {
+            if (intArr[i] > greatestNumber)
+            {
+                greatestNumber = intArr[i];
+            }
+        }
+        return greatestNumber;
     }
 
     private static bool HasDuplicateValue(int[] intArr)
