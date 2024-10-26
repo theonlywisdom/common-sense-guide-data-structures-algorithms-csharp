@@ -10,6 +10,19 @@ internal partial class Program
         int valIndex = BinarySearch(intArr, searchVal);
         Console.WriteLine($"{searchVal} is {(valIndex == -1 ? "not found" : $"at index {valIndex}")}");
     }
+    private string[] SelectAStrings(string[] strArray)
+    {
+        List<string> strList = new List<string>();
+        foreach (string str in strArray)
+        {
+            if (str.StartsWith("a", StringComparison.OrdinalIgnoreCase))
+            {
+                strList.Add(str);
+            }
+        }
+
+        return [.. strList];
+    }
 
     private int ChessboardSpace(int numOfGrains)
     {
