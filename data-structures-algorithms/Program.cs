@@ -11,6 +11,20 @@ internal partial class Program
         Console.WriteLine($"{searchVal} is {(valIndex == -1 ? "not found" : $"at index {valIndex}")}");
     }
 
+    private int ChessboardSpace(int numOfGrains)
+    {
+        int chessboardSpaces = 0;
+        int placedGrains = 0;
+
+        while (placedGrains < chessboardSpaces)
+        {
+            placedGrains *= 2;
+            placedGrains++;
+        }
+
+        return chessboardSpaces;
+    }
+
     private bool IsLeapYear(int year)
     {
         return (year % 100 == 0) ? (year % 400 == 0) : (year % 4 == 0);
