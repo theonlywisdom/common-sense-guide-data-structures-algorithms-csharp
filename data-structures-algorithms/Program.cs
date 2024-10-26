@@ -10,9 +10,25 @@ internal partial class Program
         int valIndex = BinarySearch(intArr, searchVal);
         Console.WriteLine($"{searchVal} is {(valIndex == -1 ? "not found" : $"at index {valIndex}")}");
     }
+
+    private double MedianOfOrderedArray(int[] valArray)
+    {
+        int middleIndex = valArray.Length / 2;
+
+
+        if (valArray.Length % 2 == 0)
+        {
+            return (valArray[middleIndex - 1] + valArray[middleIndex]) / 2;
+        }
+        else
+        {
+            return valArray[middleIndex];
+        }
+    }
+
     private string[] SelectAStrings(string[] strArray)
     {
-        List<string> strList = new List<string>();
+        List<string> strList = new();
         foreach (string str in strArray)
         {
             if (str.StartsWith("a", StringComparison.OrdinalIgnoreCase))
