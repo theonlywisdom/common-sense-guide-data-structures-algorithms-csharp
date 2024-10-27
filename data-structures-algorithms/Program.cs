@@ -2,14 +2,59 @@
 {
     private static void Main(string[] args)
     {
-        int[] intArr = new int[] { 4, 2, 7, 1, 3 };
-        int[] sortedArray = InsertionSort(intArr);
+        char[] chars = { 'a', 'b', 'c', 'd' };
+        string[] strings = WordBuilder(chars);
 
-        foreach (int val in sortedArray)
+        foreach (var item in strings)
         {
-            Console.WriteLine(val);
+            Console.WriteLine(item);
+        }
+    }
+
+    private static string[] WordBuilder(char[] chars)
+    {
+        List<string> collection = new List<string>();
+        for (int i = 0; i < chars.Length; i++)
+        {
+            for (int j = 0; j < chars.Length; j++)
+            {
+                collection.Add($"{chars[i]}{chars[j]}");
+            }
         }
 
+        return collection.ToArray();
+    }
+
+    private static int AverageOfEvenNumbers(int[] intArr1)
+    {
+        int sumOfEvenNums = 0;
+        int countOfEvenNums = 0;
+
+        for (int i = 0; i < intArr1.Length; i++)
+        {
+            if (intArr1[i] % 2 == 0)
+            {
+                sumOfEvenNums += intArr1[i];
+                countOfEvenNums++;
+            }
+        }
+
+        return sumOfEvenNums / countOfEvenNums;
+    }
+
+    private static int[] GetArrayIntersection(int[] intArr1, int[] intArr2)
+    {
+        HashSet<int> set1 = new HashSet<int>(intArr1);
+        List<int> arrayIntersect = new List<int>();
+
+        for (int i = 0; i < intArr2.Length; i++)
+        {
+            if (!set1.Add(intArr2[i]))
+            {
+                arrayIntersect.Add(intArr2[i]);
+            }
+        }
+        return arrayIntersect.ToArray();
     }
 
     private static int[] InsertionSort(int[] intArr)
