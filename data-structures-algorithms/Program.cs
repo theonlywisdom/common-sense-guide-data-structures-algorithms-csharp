@@ -2,16 +2,29 @@
 {
     private static void Main(string[] args)
     {
-        int[][] jaggedArr =
-            [
-                [0, 1, 1, 1, 0],
-                [0, 1, 0, 1, 0, 1],
-                [1,0]
-            ];
+        string word = "madam";
+        bool isPalindrome = IsPalindrome(word);
 
-        int numOfOnes = CountOnes(jaggedArr);
+        Console.WriteLine(isPalindrome);
+    }
 
-        Console.WriteLine(numOfOnes);
+    private static bool IsPalindrome(string word)
+    {
+        int leftIndex = 0;
+
+        int rightIndex = word.Length - 1;
+
+        while (leftIndex < word.Length / 2)
+        {
+            if (word[leftIndex] != word[rightIndex])
+            {
+                return false;
+            }
+            leftIndex++;
+            rightIndex--;
+        }
+
+        return true;
     }
 
     private static int CountOnes(int[][] jaggedArr)
