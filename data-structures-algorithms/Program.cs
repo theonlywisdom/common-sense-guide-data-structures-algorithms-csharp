@@ -3,13 +3,39 @@
     private static void Main(string[] args)
     {
         int[] intArr = new int[] { 4, 2, 7, 1, 3 };
-        int[] sortedArray = SelectionSort(intArr);
+        int[] sortedArray = InsertionSort(intArr);
 
         foreach (int val in sortedArray)
         {
             Console.WriteLine(val);
         }
 
+    }
+
+    private static int[] InsertionSort(int[] intArr)
+    {
+        for (int index = 1; index < intArr.Length; index++)
+        {
+            int tempValue = intArr[index];
+            int position = index - 1;
+
+            while (position >= 0)
+            {
+                if (intArr[position] > tempValue)
+                {
+                    intArr[position + 1] = intArr[position];
+                    position = position - 1;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            intArr[position + 1] = tempValue;
+        }
+
+        return intArr;
     }
 
     private static int[] SelectionSort(int[] intArr)
