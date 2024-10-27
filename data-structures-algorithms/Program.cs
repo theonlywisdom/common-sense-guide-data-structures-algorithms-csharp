@@ -2,9 +2,48 @@
 {
     private static void Main(string[] args)
     {
-        double[] tempsFahr = new double[] { 134, 67.9, 112 };
+        int[][] jaggedArr =
+            [
+                [0, 1, 1, 1, 0],
+                [0, 1, 0, 1, 0, 1],
+                [1,0]
+            ];
 
-        double avgReading = AverageCelsius(tempsFahr);
+        int numOfOnes = CountOnes(jaggedArr);
+
+        Console.WriteLine(numOfOnes);
+    }
+
+    private static int CountOnes(int[][] jaggedArr)
+    {
+        int count = 0;
+
+        foreach (int[] innerArr in jaggedArr)
+        {
+            foreach (var item in innerArr)
+            {
+                if (item == 1)
+                {
+                    count += 1;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    private static string[] MarkInventory(string[] clothesArr)
+    {
+        List<string> clothingOptions = new List<string>();
+        foreach (string item in clothesArr)
+        {
+            for (int i = 1; i < 6; i++)
+            {
+                clothingOptions.Add($"{item} Size: {i}");
+            }
+        }
+
+        return clothingOptions.ToArray();
     }
 
     private static double AverageCelsius(double[] tempsFahr)
