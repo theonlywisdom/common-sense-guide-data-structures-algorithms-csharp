@@ -2,13 +2,28 @@
 {
     private static void Main(string[] args)
     {
-        char[] chars = { 'a', 'b', 'c', 'd' };
-        string[] strings = WordBuilder(chars);
+        double[] tempsFahr = new double[] { 134, 67.9, 112 };
 
-        foreach (var item in strings)
+        double avgReading = AverageCelsius(tempsFahr);
+    }
+
+    private static double AverageCelsius(double[] tempsFahr)
+    {
+        List<double> celsiusTemps = new List<double>();
+        foreach (var val in tempsFahr)
         {
-            Console.WriteLine(item);
+            double celsiusConv = (val - 32) / 1.8;
+            celsiusTemps.Add(celsiusConv);
         }
+
+        double sumOfcelsiusTemps = 0;
+
+        foreach (var val in celsiusTemps)
+        {
+            sumOfcelsiusTemps += val;
+        }
+
+        return sumOfcelsiusTemps / celsiusTemps.Count;
     }
 
     private static string[] WordBuilder(char[] chars)
