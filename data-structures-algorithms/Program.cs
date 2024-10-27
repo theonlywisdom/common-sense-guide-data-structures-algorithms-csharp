@@ -2,10 +2,44 @@
 {
     private static void Main(string[] args)
     {
-        string word = "madam";
-        bool isPalindrome = IsPalindrome(word);
+        int[] vals = { 1, 2, 3, 4, 5 };
+        int[] vals2 = TwoNumberProducts(vals);
 
-        Console.WriteLine(isPalindrome);
+        foreach (int val in vals2)
+        {
+            Console.WriteLine(val);
+        }
+    }
+
+    private static bool SumArray100(int[] intArr)
+    {
+        int leftIndex = 0;
+        int rightIndex = intArr.Length - 1;
+        while (leftIndex < intArr.Length / 2)
+        {
+            if (intArr[leftIndex] + intArr[rightIndex] != 100)
+            {
+                return false;
+            }
+            leftIndex++;
+            rightIndex--;
+        }
+        return true;
+    }
+
+    private static int[] TwoNumberProducts(int[] vals)
+    {
+        List<int> products = new List<int>();
+
+        for (int i = 0; i < vals.Length - 1; i++)
+        {
+            for (int j = i + 1; j < vals.Length; j++)
+            {
+
+                products.Add(vals[i] * vals[j]);
+            }
+        }
+        return products.ToArray();
     }
 
     private static bool IsPalindrome(string word)
