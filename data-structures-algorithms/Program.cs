@@ -2,13 +2,83 @@
 {
     private static void Main(string[] args)
     {
-        int[] vals = { 1, 2, 3, 4, 5 };
-        int[] vals2 = TwoNumberProducts(vals);
+        int[] array1 = { 1, 3, 5, 7 };
+        int[] array2 = { 2, 4, 6, 8 };
 
-        foreach (int val in vals2)
+        int[] mergedArray = MergeTwoSortedArrays(array1, array2);
+
+        foreach (var item in mergedArray)
         {
-            Console.WriteLine(val);
+            Console.WriteLine(item);
         }
+    }
+
+    public static int[] MergeTwoSortedArrays(int[] array1, int[] array2)
+    {
+        int[] mergedList = new int[array1.Length + array2.Length];
+
+        int array1Pointer = 0;
+        int array2Pointer = 0;
+        int mergedPointer = 0;
+
+        while (array1Pointer < array1.Length
+            || array2Pointer < array2.Length)
+        {
+            if (array1Pointer >= array1.Length)
+            {
+                mergedList[mergedPointer] = array2[array2Pointer];
+                array2Pointer++;
+            }
+            else if (array2Pointer >= array2.Length)
+            {
+                mergedList[mergedPointer] = array1[array1Pointer];
+                array1Pointer++;
+            }
+            else if (array1[array1Pointer] < array2[array2Pointer])
+            {
+                mergedList[mergedPointer] = array1[array1Pointer];
+                array1Pointer++;
+            }
+            else
+            {
+                mergedList[mergedPointer] = array2[array2Pointer];
+                array2Pointer++;
+            }
+            mergedPointer++;
+        }
+
+        return [.. mergedList];
+    }
+
+    private static bool FindNeedle(string needle, string haystack)
+    {
+        int needleIndex = 0;
+        int haystackIndex = 0;
+        bool isFound = false;
+
+        while (haystackIndex < haystack.Length)
+        {
+            if (needle[needleIndex] == haystack[haystackIndex])
+            {
+                isFound = true;
+                while (needleIndex < needle.Length)
+                {
+                    if (needle[needleIndex] != haystack[haystackIndex + needleIndex])
+                    {
+                        isFound = false;
+                        break;
+                    }
+                    needleIndex++;
+                }
+                if (isFound)
+                {
+                    return true;
+                }
+                needleIndex = 0;
+            }
+            haystackIndex++;
+        }
+        return false;
     }
 
     private static bool SumArray100(int[] intArr)
