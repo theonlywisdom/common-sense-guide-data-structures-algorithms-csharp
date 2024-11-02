@@ -2,11 +2,35 @@
 {
     private static void Main(string[] args)
     {
-        int[] resumes = { 2, 4, 6, 8, 1, 3, 5, 7 };
+        char[] array1 = { 'a', 'b', 'c', 'd', 'e', 'f' };
+        char[] array2 = { 'b', 'd', 'f' };
 
-        int final = PickResume(resumes);
+        bool isSubset = IsSubset(array1, array2);
 
-        Console.WriteLine(final);
+        Console.WriteLine(isSubset);
+    }
+
+    private static bool IsSubset(char[] array1, char[] array2)
+    {
+        HashSet<char> largerSet =
+            array1.Length > array2.Length ? new(array1) : new(array2);
+        char[] smallerArray =
+            array1.Length < array2.Length ? array1 : array2;
+
+        if (array1 == null || array2 == null)
+        {
+            return false;
+        }
+
+        foreach (var item in smallerArray)
+        {
+            if (!largerSet.Contains(item))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static int PickResume(int[] resumes)
