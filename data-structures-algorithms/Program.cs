@@ -2,11 +2,30 @@
 {
     private static void Main(string[] args)
     {
-        char[] array1 = new char[] { 'a', 'b', 'c', 'd', 'c', 'e', 'f' };
+        string stringArg = "the quick brown box jumps over a lazy dog";
 
-        bool dupe = HasDuplicate(array1);
+        char missingChar = FindMissingLetter(stringArg);
 
-        Console.WriteLine(dupe);
+        Console.WriteLine(missingChar);
+    }
+
+    private static char FindMissingLetter(string stringArg)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(stringArg);
+
+        HashSet<char> alphabetSet = new("ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToUpperInvariant());
+        HashSet<char> stringSet = new(stringArg.ToUpperInvariant());
+
+
+        foreach (var letter in alphabetSet)
+        {
+            if (!stringSet.Contains(letter))
+            {
+                return letter;
+            }
+        }
+
+        return char.MinValue;
     }
 
     private static bool HasDuplicate(char[] array1)
