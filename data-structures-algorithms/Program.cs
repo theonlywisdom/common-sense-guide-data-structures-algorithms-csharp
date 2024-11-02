@@ -6,6 +6,7 @@
 
         int final = PickResume(resumes);
 
+        Console.WriteLine(final);
     }
 
     private static int PickResume(int[] resumes)
