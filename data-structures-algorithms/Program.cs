@@ -2,11 +2,35 @@
 {
     private static void Main(string[] args)
     {
-        string stringArg = "the quick brown box jumps over a lazy dog";
+        string stringArg = "minimum";
 
-        char missingChar = FindMissingLetter(stringArg);
+        char missingChar = FindFirstNonDuplicateLetter(stringArg);
 
         Console.WriteLine(missingChar);
+    }
+
+    private static char FindFirstNonDuplicateLetter(string stringArg)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(stringArg);
+
+        Dictionary<char, int> letterCounts = [];
+
+        foreach (var letter in stringArg)
+        {
+            letterCounts[letter] = letterCounts.ContainsKey(letter)
+                ? letterCounts[letter] + 1
+                : 1;
+        }
+
+        foreach (var letter in letterCounts.Keys)
+        {
+            if (letterCounts[letter] == 1)
+            {
+                return letter;
+            }
+        }
+
+        return char.MinValue;
     }
 
     private static char FindMissingLetter(string stringArg)
