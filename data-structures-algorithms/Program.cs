@@ -2,11 +2,11 @@
 {
     private static void Main(string[] args)
     {
-        string stringArg = "minimum";
+        string stringArg = "var student1 = new StudentName(\"Craig\", \"Playstead\");";
+        var lint = new Lint();
+        var isValidSyntax = lint.LintCode(stringArg);
 
-        char missingChar = FindFirstNonDuplicateLetter(stringArg);
-
-        Console.WriteLine(missingChar);
+        Console.WriteLine(isValidSyntax);
     }
 
     private static char FindFirstNonDuplicateLetter(string stringArg)
@@ -547,5 +547,67 @@
             Console.WriteLine($"{num}");
             num += 2;
         }
+    }
+}
+
+internal class Lint
+{
+    private static readonly Dictionary<char, char> Braces = new()
+        {
+           { '(', ')'},
+           { '[', ']'},
+           { '{', '}'},
+        };
+    private static readonly HashSet<char> OpeningBraces = new(Braces.Keys);
+
+    private static readonly HashSet<char> ClosingBraces = new(Braces.Values);
+
+    private Stack<char> _codeStack = new();
+
+    internal object LintCode(string text)
+    {
+        char poppedOpeningBrace = char.MinValue;
+        foreach (var item in text)
+        {
+            if (IsOpeningBrace(item))
+            {
+                _codeStack.Push(item);
+            }
+            else if (IsClosingBrace(item))
+            {
+                if (!_codeStack.TryPop(out poppedOpeningBrace))
+                {
+                    return $"{item} does not have an opening brace";
+                }
+                if (IsNotAMatch(poppedOpeningBrace, item))
+                {
+                    return $"{item} has a mismatched opening brace";
+                }
+            }
+        }
+
+        if (_codeStack.TryPeek(out char unmatchedOpeningBrace))
+        {
+            return $"{unmatchedOpeningBrace} does not have a closing brace";
+        }
+
+        return true;
+    }
+
+    private static bool IsOpeningBrace(char brace)
+    {
+        return OpeningBraces.Contains(brace);
+    }
+
+    private static bool IsClosingBrace(char brace)
+    {
+        return ClosingBraces.Contains(brace);
+    }
+
+    private static bool IsNotAMatch(char openingBrace, char closingBrace)
+    {
+
+        return !Braces.TryGetValue(openingBrace, out char expectClosingBrace)
+            || expectClosingBrace != closingBrace;
     }
 }
