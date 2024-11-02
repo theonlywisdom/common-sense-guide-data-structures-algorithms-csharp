@@ -2,12 +2,42 @@
 {
     private static void Main(string[] args)
     {
-        char[] array1 = { 'a', 'b', 'c', 'd', 'e', 'f' };
-        char[] array2 = { 'b', 'd', 'f' };
+        char[] array1 = new char[] { 'a', 'b', 'c', 'd', 'c', 'e', 'f' };
 
-        bool isSubset = IsSubset(array1, array2);
+        bool dupe = HasDuplicate(array1);
 
-        Console.WriteLine(isSubset);
+        Console.WriteLine(dupe);
+    }
+
+    private static bool HasDuplicate(char[] array1)
+    {
+        HashSet<int> set1 = [];
+
+        foreach (var item in array1)
+        {
+            if (!set1.Add(item))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static int[] Intersect(int[] array1, int[] array2)
+    {
+        HashSet<int> set1 = new(array1);
+        HashSet<int> intersectSet = [];
+
+        foreach (var item in array2)
+        {
+            if (set1.Contains(item))
+            {
+                intersectSet.Add(item);
+            }
+        }
+
+        return intersectSet.ToArray();
     }
 
     private static bool IsSubset(char[] array1, char[] array2)
