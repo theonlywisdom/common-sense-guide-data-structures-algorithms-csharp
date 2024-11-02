@@ -2,15 +2,35 @@
 {
     private static void Main(string[] args)
     {
-        int[] array1 = { 1, 3, 5, 7 };
-        int[] array2 = { 2, 4, 6, 8 };
+        int[] resumes = { 2, 4, 6, 8, 1, 3, 5, 7 };
 
-        int[] mergedArray = MergeTwoSortedArrays(array1, array2);
+        int final = PickResume(resumes);
 
-        foreach (var item in mergedArray)
+    }
+
+    private static int PickResume(int[] resumes)
+    {
+        Position eliminate = Position.Top;
+        while (resumes.Length > 1)
         {
-            Console.WriteLine(item);
+            if (eliminate == Position.Top)
+            {
+                resumes = resumes[(resumes.Length / 2)..];
+                eliminate = Position.Bottom;
+            }
+            else if (eliminate == Position.Bottom)
+            {
+                resumes = resumes[..(resumes.Length / 2)];
+                eliminate = Position.Top;
+            }
         }
+
+        return resumes[0];
+    }
+
+    enum Position
+    {
+        Top, Bottom
     }
 
     public static int[] MergeTwoSortedArrays(int[] array1, int[] array2)
